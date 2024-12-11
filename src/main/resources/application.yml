@@ -1,0 +1,53 @@
+spring:
+  version: 1.0
+  # 获取ip地址开关
+  addressEnabled: true
+  application:
+    name: SQLExu
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+server:
+  captchaEnabled: true
+  captchaType: math
+  port: 8080
+  tomcat:
+    # 最大连接数
+    max-connections: 1000
+    # 连接超时时间
+    connection-timeout: 12000
+    threads:
+      # 最小工作线程数
+      min-spare: 10
+      # 最大工作线程数
+      max: 100
+
+# 禁用Actuator端点
+management:
+  endpoints:
+    enabled-by-default: false
+  # 禁止Actuator监控Redis连接
+  health:
+    redis:
+      enabled: false
+
+
+#最大连接数
+http:
+  maxTotal: 100
+  #并发数
+  defaultMaxPerRoute: 20
+  #创建连接的最长时间
+  connectTimeout: 2000
+  #从连接池中获取到连接的最长时间
+  connectionRequestTimeout: 5000
+  #数据传输的最长时间
+  socketTimeout: 10000
+  #提交请求前测试连接是否可用
+  staleConnectionCheckEnabled: true
+
+
+
