@@ -6,11 +6,7 @@
 import sendCommandVue from "./components/sendCommand.vue";
 
 export default {
-  data() {
-    return {
 
-    }
-  },
   components: {
     sendCommandVue
   }
