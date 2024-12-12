@@ -3,7 +3,8 @@
         <p>请输入要执行的命令:</p>
         <input type="text" placeholder="请输入命令" id="commandId" v-model.lazy="command"><br>
         <!-- <label for="text">{{ command }}</label><br> -->
-        <button @click="execuHander" class="execu">执行</button>
+        <button @click="execuHandle" class="execu">执行</button>
+        <button @click="stopHandle" class="stop">停止</button>
         <div>
             <p id="result">{{ result }}</p>
             <pre v-if="rawData">{{ rawData }}</pre>
@@ -24,7 +25,7 @@ export default {
         }
     },
     methods: {
-        execuHander() {
+        execuHandle() {
             this.result = this.command + " 命令执行结果："
             console.log(this.command);
             const data = {
@@ -36,7 +37,7 @@ export default {
             axios.post('/api/executeCommand', data, { headers: headers })
                 .then(response => {
                     console.log(this.command)
-                    console.log('Success:', response);
+                    // console.log('Success:', response);
                     console.log(response.data)
                     this.rawData = response.data
                     this.rawData = this.rawData.replace("Command executed:", "Command executed:\n")
@@ -46,7 +47,11 @@ export default {
                     // 请求失败处理
                     console.log(error);
                 });
+        },
+        stopHandle(){
+
         }
+        
     }
 }
 
@@ -60,6 +65,11 @@ export default {
 
 .execu {
     margin-top: 15px;
+    margin-right: 5px;
+}
+.stop {
+    margin-top: 15px;
+    margin-left: 5px;
 }
 
 pre {

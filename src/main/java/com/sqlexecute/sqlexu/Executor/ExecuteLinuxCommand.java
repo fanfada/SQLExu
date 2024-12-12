@@ -1,15 +1,20 @@
 package com.sqlexecute.sqlexu.Executor;
 
+import com.sqlexecute.sqlexu.utils.UuidUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
 public class ExecuteLinuxCommand {
+
+    private final Map<String, Process> processMap = new ConcurrentHashMap<>();
 
     public String executeCommand(String command) {
         if (command == null || command.trim().isEmpty()) {
@@ -25,7 +30,8 @@ public class ExecuteLinuxCommand {
 
             // 启动进程
             Process process = processBuilder.start();
-
+            String taskId = UuidUtil.uuid().substring(0, 7);
+            processMap.put(taskId, process);
             // 获取命令输出
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
