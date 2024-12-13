@@ -4,7 +4,7 @@
         <input type="text" placeholder="请输入命令" id="commandId" v-model.lazy="command"><br>
         <!-- <label for="text">{{ command }}</label><br> -->
         <button @click="execuHandle" class="execu">执行</button>
-        <button @click="processHandle" class="stop">执行进度</button>
+        <button @click="processHandle" class="process">执行进度</button>
         <button @click="stopHandle" class="stop">停止执行</button>
         <div>
             <p id="result">{{ result }}</p>
@@ -111,6 +111,11 @@ export default {
 .stop {
     margin-top: 15px;
     margin-left: 5px;
+}
+.process {
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 pre {
